@@ -175,3 +175,30 @@ so the quality of the documentation is very important.
 
 For editing DSDL definitions, we recommend Visual Studio Code.
 See `.vscode/` for recommended extensions and workspace settings.
+
+## Compiling the data types
+(install nunavut/nnvg)[https://github.com/UAVCAN/nunavut]
+`pip install nunavut`
+
+### Compile the UAVCAN ones
+```
+nnvg --target-language c \
+     --pp-max-emptylines=1  \
+     --pp-trim-trailing-whitespace \
+     --target-endianness=any \
+     --enable-serialization-asserts \
+     --outdir public_regulated_data_types/uavcan-header \
+     uavcan
+```
+
+### Compile REG ones
+```
+nnvg --target-language c \
+     --pp-max-emptylines=1  \
+     --pp-trim-trailing-whitespace \
+     --target-endianness=any \
+     --enable-serialization-asserts \
+     --lookup uavcan \
+     --outdir public_regulated_data_types/reg-header \
+     reg
+```
